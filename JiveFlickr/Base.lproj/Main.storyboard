@@ -32,7 +32,13 @@
                             <outlet property="delegate" destination="ybZ-GI-Jak" id="FJ9-p6-K5S"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Flickr Search" id="4kp-ch-PsP"/>
+                    <navigationItem key="navigationItem" title="Flickr Search" id="4kp-ch-PsP">
+                        <barButtonItem key="rightBarButtonItem" title="Clear" id="AA9-f0-Dp9">
+                            <connections>
+                                <action selector="clear:" destination="ybZ-GI-Jak" id="MFH-3H-TjZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="OJb-21-oWq" kind="show" identifier="ResultsSegue" id="6uD-bg-16h"/>
                     </connections>
@@ -54,7 +60,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C7g-13-g8K" id="lra-h4-NWa">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

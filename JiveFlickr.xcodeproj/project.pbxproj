@@ -14,6 +14,7 @@
 		C1D745CF1E54CE6300433DED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1D745CE1E54CE6300433DED /* Assets.xcassets */; };
 		C1D745D21E54CE6300433DED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1D745D01E54CE6300433DED /* LaunchScreen.storyboard */; };
 		C1D745DE1E54D20900433DED /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D745DD1E54D20900433DED /* Search.swift */; };
+		C1E1FB391E550E59000A4F7C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E1FB381E550E59000A4F7C /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		C1D745D11E54CE6300433DED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1D745D31E54CE6300433DED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1D745DD1E54D20900433DED /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		C1E1FB381E550E59000A4F7C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				C1D745DD1E54D20900433DED /* Search.swift */,
 				C13C92801E54F88000D335F7 /* Results.swift */,
 				C1371E541E54E26700A4E25D /* Model.swift */,
+				C1E1FB381E550E59000A4F7C /* Extensions.swift */,
 			);
 			path = JiveFlickr;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1E1FB391E550E59000A4F7C /* Extensions.swift in Sources */,
 				C1371E551E54E26700A4E25D /* Model.swift in Sources */,
 				C1D745DE1E54D20900433DED /* Search.swift in Sources */,
 				C13C92811E54F88000D335F7 /* Results.swift in Sources */,

@@ -23,10 +23,10 @@ class Model {
         defaults.synchronize()
     }
     
-//    func clearSearches() {
-//        let defaults = UserDefaults.standard
-//        defaults.removeObject(forKey: "searches")
-//        defaults.synchronize()
-//    }
+    func clearSearches() {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "searches")
+        defaults.synchronize()
+    }
     
 }

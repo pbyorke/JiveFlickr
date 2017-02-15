@@ -51,6 +51,12 @@ class Search: UITableViewController {
         searchController.searchBar.text = filteredSearches[indexPath.row]
     }
 
+    @IBAction func clear(_ sender: Any) {
+        Model.sharedInstance.clearSearches()
+        searches = [String]()
+        filteredSearches = [String]()
+    }
+    
 }
 
 extension Search: UISearchResultsUpdating {
@@ -62,16 +68,24 @@ extension Search: UISearchResultsUpdating {
 
 extension Search: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searches.append(searchController.searchBar.text!)
-        Model.sharedInstance.putSearches(searches)
+        let text = searchBar.text!
+        searchBar.text = ""
+        appendIfMissing(text)
         let controller = storyboard?.instantiateViewController(withIdentifier: "ResultsScene") as? Results
-        controller?.search = searchController.searchBar.text!
+        controller?.search = text
         navigationController?.pushViewController(controller!, animated: true)
     }
+    
+    private func appendIfMissing(_ text: String) {
+        for word in searches {
+            if word.lowercased() == text.lowercased() {
+                return
+            }
+        }
+        searches.append(text.lowercased())
+        searches.sort()
+        Model.sharedInstance.putSearches(searches)
+    }
+    
 }
 
-extension String {
-    func containsString(_ string: String) -> Bool {
-        return self.range(of: string) != nil
-    }
-}
