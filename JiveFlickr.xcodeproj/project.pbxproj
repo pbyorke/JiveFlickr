@@ -7,21 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C1371E551E54E26700A4E25D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1371E541E54E26700A4E25D /* Model.swift */; };
+		C13C92811E54F88000D335F7 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13C92801E54F88000D335F7 /* Results.swift */; };
 		C1D745C81E54CE6300433DED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D745C71E54CE6300433DED /* AppDelegate.swift */; };
-		C1D745CA1E54CE6300433DED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D745C91E54CE6300433DED /* ViewController.swift */; };
 		C1D745CD1E54CE6300433DED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1D745CB1E54CE6300433DED /* Main.storyboard */; };
 		C1D745CF1E54CE6300433DED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1D745CE1E54CE6300433DED /* Assets.xcassets */; };
 		C1D745D21E54CE6300433DED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1D745D01E54CE6300433DED /* LaunchScreen.storyboard */; };
+		C1D745DE1E54D20900433DED /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D745DD1E54D20900433DED /* Search.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C1371E541E54E26700A4E25D /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		C13C92801E54F88000D335F7 /* Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		C1D745C41E54CE6300433DED /* JiveFlickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiveFlickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D745C71E54CE6300433DED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C1D745C91E54CE6300433DED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C1D745CC1E54CE6300433DED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C1D745CE1E54CE6300433DED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1D745D11E54CE6300433DED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1D745D31E54CE6300433DED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1D745DD1E54D20900433DED /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +59,13 @@
 			isa = PBXGroup;
 			children = (
 				C1D745C71E54CE6300433DED /* AppDelegate.swift */,
-				C1D745C91E54CE6300433DED /* ViewController.swift */,
 				C1D745CB1E54CE6300433DED /* Main.storyboard */,
 				C1D745CE1E54CE6300433DED /* Assets.xcassets */,
 				C1D745D01E54CE6300433DED /* LaunchScreen.storyboard */,
 				C1D745D31E54CE6300433DED /* Info.plist */,
+				C1D745DD1E54D20900433DED /* Search.swift */,
+				C13C92801E54F88000D335F7 /* Results.swift */,
+				C1371E541E54E26700A4E25D /* Model.swift */,
 			);
 			path = JiveFlickr;
 			sourceTree = "<group>";
@@ -137,7 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1D745CA1E54CE6300433DED /* ViewController.swift in Sources */,
+				C1371E551E54E26700A4E25D /* Model.swift in Sources */,
+				C1D745DE1E54D20900433DED /* Search.swift in Sources */,
+				C13C92811E54F88000D335F7 /* Results.swift in Sources */,
 				C1D745C81E54CE6300433DED /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,6 +310,7 @@
 				C1D745D81E54CE6300433DED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
