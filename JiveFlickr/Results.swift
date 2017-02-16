@@ -8,33 +8,43 @@
 
 import UIKit
 
-class Results: UITableViewController {
+class Results: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var spinner: UIView!
     
     var search = ""
     var photos = [Photo]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        table.delegate = self
+        table.dataSource = self
         title = search
+        spinner.isHidden = false
         Model.sharedInstance.searchAll(search) {
             photoArray in
-            self.photos = photoArray
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.spinner.isHidden = true
+                self.photos = photoArray
+                self.table.reloadData()
+            }
         }
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photos.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = photos[indexPath.row].title
         return cell
     }
+    
 
 }
