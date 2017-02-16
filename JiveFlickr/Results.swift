@@ -8,6 +8,12 @@
 
 import UIKit
 
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                              //
+// class Results - get the keyword(s) from Search, do a Flickr search, then display the results //
+//                                                                                              //
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
 class Results: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var table: UITableView!
@@ -15,15 +21,22 @@ class Results: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var search = ""
     var photos = [Photo]()
+    var model = Model.sharedInstance
     
+    /////////////////////////////////////////////////////////////////
+    //                                                             //
+    // viewDidLoad() - set up delegates and do a search for photos //
+    //                                                             //
+    /////////////////////////////////////////////////////////////////
+
     override func viewDidLoad() {
         super.viewDidLoad()
         table.delegate = self
         table.dataSource = self
         title = search
         spinner.isHidden = false
-        table.estimatedRowHeight = 100
-        Model.sharedInstance.searchAll(search) {
+        table.estimatedRowHeight = 66
+        model.searchAll(search) {
             photoArray in
             DispatchQueue.main.async {
                 self.spinner.isHidden = true
@@ -33,24 +46,52 @@ class Results: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    ///////////////////////////////////
+    //                               //
+    // numberOfSections() - always 1 //
+    //                               //
+    ///////////////////////////////////
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    //////////////////////////////////////////////////////////////////////
+    //                                                                  //
+    // numberOfRowsInSection() - return the number of entries in photos //
+    //                                                                  //
+    //////////////////////////////////////////////////////////////////////
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photos.count
     }
     
+    //////////////////////////////////////////////////////
+    //                                                  //
+    // cellForRowAt() - format the cell for a given row //
+    //                                                  //
+    //////////////////////////////////////////////////////
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? PhotoCell
-        cell?.data.text = photos[indexPath.row].title
+        let photo = photos[indexPath.row]
+        cell?.data.text = photo.title
+        do {
+            cell?.photo.image = try UIImage(data: Data(contentsOf: URL(string: photo.thumbnail)!))
+        } catch {}
         cell?.sizeToFit()
         return cell!
     }
     
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                        //
+    // heightForRowAt() - send back the constant that tells the system to vary the row height //
+    //                                                                                        //
+    ////////////////////////////////////////////////////////////////////////////////////////////
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+//        return UITableViewAutomaticDimension
+        return 66
     }
-    
 
 }

@@ -22,11 +22,11 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fDo-Ow-2Mn" id="i5e-7w-Z6Q">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z5Y-37-eXV">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -72,32 +72,31 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="MK7-X5-g4s" customClass="PhotoCell" customModule="JiveFlickr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="66" id="MK7-X5-g4s" customClass="PhotoCell" customModule="JiveFlickr" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MK7-X5-g4s" id="cdI-Du-Lvx">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jOO-aL-sdA">
-                                                    <rect key="frame" x="8" y="-1" width="44" height="44"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jOO-aL-sdA">
+                                                    <rect key="frame" x="8" y="8" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="44" id="3i9-4b-aEa"/>
-                                                        <constraint firstAttribute="height" constant="44" id="Pde-0S-5Th"/>
+                                                        <constraint firstAttribute="width" constant="50" id="3i9-4b-aEa"/>
+                                                        <constraint firstAttribute="height" constant="50" id="Pde-0S-5Th"/>
                                                     </constraints>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0jA-Tb-p1t">
-                                                    <rect key="frame" x="60" y="8" width="307" height="28"/>
+                                                    <rect key="frame" x="66" y="16.5" width="301" height="33"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="0jA-Tb-p1t" firstAttribute="top" secondItem="cdI-Du-Lvx" secondAttribute="top" constant="8" id="4QW-os-GVx"/>
-                                                <constraint firstAttribute="bottom" secondItem="0jA-Tb-p1t" secondAttribute="bottom" constant="8" id="HI7-cF-4jP"/>
                                                 <constraint firstItem="0jA-Tb-p1t" firstAttribute="leading" secondItem="jOO-aL-sdA" secondAttribute="trailing" constant="8" id="MvY-Lx-xuC"/>
                                                 <constraint firstItem="jOO-aL-sdA" firstAttribute="centerY" secondItem="cdI-Du-Lvx" secondAttribute="centerY" id="Yte-Dz-WMS"/>
+                                                <constraint firstItem="0jA-Tb-p1t" firstAttribute="centerY" secondItem="cdI-Du-Lvx" secondAttribute="centerY" id="h1F-ZV-QYL"/>
                                                 <constraint firstAttribute="trailing" secondItem="0jA-Tb-p1t" secondAttribute="trailing" constant="8" id="iYc-Mj-4Aw"/>
                                                 <constraint firstItem="jOO-aL-sdA" firstAttribute="leading" secondItem="cdI-Du-Lvx" secondAttribute="leading" constant="8" id="pHe-ny-AYh"/>
                                             </constraints>
@@ -116,7 +115,7 @@
                                         <rect key="frame" x="169" y="315" width="37" height="37"/>
                                     </activityIndicatorView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="6Vg-Oz-7cq" firstAttribute="centerX" secondItem="pH7-4m-6fG" secondAttribute="centerX" id="YkR-K8-rYh"/>
                                     <constraint firstItem="6Vg-Oz-7cq" firstAttribute="centerY" secondItem="pH7-4m-6fG" secondAttribute="centerY" id="aao-py-6BZ"/>

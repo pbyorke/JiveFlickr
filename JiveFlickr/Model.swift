@@ -6,7 +6,7 @@
 //  Copyright © 2017 Storke Brothers LLC. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 ////////////////////////////////////////////////////////////////
 //                                                            //
@@ -81,5 +81,20 @@ class Model {
             }
         }
     }
+    
+    ///////////////////////////////////////////////////////////////////////////
+    //                                                                       //
+    // getPhoto() - go out to Flickr to retrieve a thumbnail, or, if we have //
+    //              cached one, return it                                    //
+    //                                                                       //
+    ///////////////////////////////////////////////////////////////////////////
+
+//    func getThumbnail(photo: Photo, done: @escaping (UIImage)->Void) {
+//        if let thumbnail = photo.image {
+//            done(thumbnail)
+//        }
+//        let urlString = "farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret)_s.jpg"
+////        print("\(urlString)")
+//    }
     
 }
