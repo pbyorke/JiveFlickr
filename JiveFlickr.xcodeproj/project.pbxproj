@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C1309DE01E55191F007E8462 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1309DDF1E55191F007E8462 /* Server.swift */; };
+		C1309DE21E552E5A007E8462 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1309DE11E552E5A007E8462 /* Photo.swift */; };
 		C1371E551E54E26700A4E25D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1371E541E54E26700A4E25D /* Model.swift */; };
 		C13C92811E54F88000D335F7 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13C92801E54F88000D335F7 /* Results.swift */; };
 		C1D745C81E54CE6300433DED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D745C71E54CE6300433DED /* AppDelegate.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C1309DDF1E55191F007E8462 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		C1309DE11E552E5A007E8462 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		C1371E541E54E26700A4E25D /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C13C92801E54F88000D335F7 /* Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		C1D745C41E54CE6300433DED /* JiveFlickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiveFlickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +72,8 @@
 				C1D745DD1E54D20900433DED /* Search.swift */,
 				C13C92801E54F88000D335F7 /* Results.swift */,
 				C1371E541E54E26700A4E25D /* Model.swift */,
+				C1309DDF1E55191F007E8462 /* Server.swift */,
+				C1309DE11E552E5A007E8462 /* Photo.swift */,
 				C1E1FB381E550E59000A4F7C /* Extensions.swift */,
 			);
 			path = JiveFlickr;
@@ -146,10 +152,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1309DE21E552E5A007E8462 /* Photo.swift in Sources */,
 				C1E1FB391E550E59000A4F7C /* Extensions.swift in Sources */,
 				C1371E551E54E26700A4E25D /* Model.swift in Sources */,
 				C1D745DE1E54D20900433DED /* Search.swift in Sources */,
 				C13C92811E54F88000D335F7 /* Results.swift in Sources */,
+				C1309DE01E55191F007E8462 /* Server.swift in Sources */,
 				C1D745C81E54CE6300433DED /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
