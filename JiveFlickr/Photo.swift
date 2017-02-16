@@ -8,6 +8,12 @@
 
 import UIKit
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                             //
+// class Photo - represents the data about a photo returned by Flickr and caches the thumbnail //
+//                                                                                             //
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
 class Photo {
     
     var farm = 0
@@ -17,7 +23,13 @@ class Photo {
     var title = ""
     var thumbnail: UIImage?
     var image: String {return "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_b.jpg"}
-    
+
+    /////////////////////////////////////////////////////////////////////////
+    //                                                                     //
+    // getThumbnail() - if no cache, get one. then return the cached image //
+    //                                                                     //
+    /////////////////////////////////////////////////////////////////////////
+
     func getThumbnail() -> UIImage? {
         if thumbnail == nil {
             do {
@@ -29,7 +41,27 @@ class Photo {
         return thumbnail
     }
     
-    
+    /////////////////////////////////////////////////
+    //                                             //
+    // getImage() - get the full image from Flickr //
+    //                                             //
+    /////////////////////////////////////////////////
+
+    func getImage() -> UIImage? {
+        do {
+            let url = URL(string: "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_b.jpg")
+            let data = try Data(contentsOf: url!)
+            return UIImage(data: data)
+        } catch {}
+        return nil
+    }
+
+    ////////////////////////////////////////////////////
+    //                                                //
+    // dump() - dump all the variables to the console //
+    //                                                //
+    ////////////////////////////////////////////////////
+
     func dump() {
         print("Photo")
         print("  farm      \(farm)")

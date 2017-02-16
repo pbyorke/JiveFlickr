@@ -88,8 +88,13 @@ class Results: UIViewController, UITableViewDelegate, UITableViewDataSource {
     ////////////////////////////////////////////////////////////////////////////////////////////
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
         return 66
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = storyboard?.instantiateViewController(withIdentifier: "DetailsScene") as? Details
+        controller?.photo = photos[indexPath.row]
+        navigationController?.pushViewController(controller!, animated: true)
     }
 
 }
