@@ -22,6 +22,7 @@ class Results: UIViewController, UITableViewDelegate, UITableViewDataSource {
         table.dataSource = self
         title = search
         spinner.isHidden = false
+        table.estimatedRowHeight = 100
         Model.sharedInstance.searchAll(search) {
             photoArray in
             DispatchQueue.main.async {
@@ -41,9 +42,14 @@ class Results: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = photos[indexPath.row].title
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? PhotoCell
+        cell?.data.text = photos[indexPath.row].title
+        cell?.sizeToFit()
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
 
