@@ -15,8 +15,19 @@ class Photo {
     var server = ""
     var secret = ""
     var title = ""
-    var thumbnail: String {return "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_t.jpg"}
+    var thumbnail: UIImage?
     var image: String {return "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_b.jpg"}
+    
+    func getThumbnail() -> UIImage? {
+        if thumbnail == nil {
+            do {
+                let url = URL(string: "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_t.jpg")
+                let data = try Data(contentsOf: url!)
+                thumbnail = UIImage(data: data)
+            } catch {}
+        }
+        return thumbnail
+    }
     
     
     func dump() {

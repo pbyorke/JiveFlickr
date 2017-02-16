@@ -76,9 +76,7 @@ class Results: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? PhotoCell
         let photo = photos[indexPath.row]
         cell?.data.text = photo.title
-        do {
-            cell?.photo.image = try UIImage(data: Data(contentsOf: URL(string: photo.thumbnail)!))
-        } catch {}
+        cell?.photo.image = photo.getThumbnail()
         cell?.sizeToFit()
         return cell!
     }
