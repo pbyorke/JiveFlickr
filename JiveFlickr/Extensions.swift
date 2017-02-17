@@ -8,6 +8,12 @@
 
 import Foundation
 
+///////////////////////////////////////
+//                                   //
+// extension String - add a function //
+//                                   //
+///////////////////////////////////////
+
 extension String {
     func containsString(_ string: String) -> Bool {
         return self.range(of: string) != nil

@@ -23,6 +23,7 @@ class Photo {
     var title = ""
     var taken = ""
     var thumbnail: UIImage?
+    var image: UIImage?
     
     ////////////////////////////////////////////////////////
     //                                                    //
@@ -41,21 +42,6 @@ class Photo {
         done()
     }
     
-    /////////////////////////////////////////////////
-    //                                             //
-    // getImage() - get the full image from Flickr //
-    //                                             //
-    /////////////////////////////////////////////////
-
-    func getImage() -> UIImage? {
-        do {
-            let url = URL(string: "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_b.jpg")
-            let data = try Data(contentsOf: url!)
-            return UIImage(data: data)
-        } catch {}
-        return nil
-    }
-    
     ///////////////////////////////////////////////////
     //                                               //
     // getDetails() - get extra details about myself //
@@ -69,7 +55,13 @@ class Photo {
                 if let dates = photo["dates"] as? [String:Any] {
                     if let taken = dates["taken"] as? String {
                         self.taken = taken
-                        done()
+                        if self.image == nil {
+                            Server.sharedInstance.fetchData("https://farm\(self.farm).staticflickr.com/\(self.server)/\(self.id)_\(self.secret)_b.jpg") {
+                                data in
+                                self.image = UIImage(data: data!)
+                                done()
+                            }
+                        }
                     }
                 }
             }

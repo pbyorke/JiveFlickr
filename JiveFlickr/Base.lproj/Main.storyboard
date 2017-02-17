@@ -191,6 +191,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DpS-FN-ACk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="i8s-14-yJA">
+                                        <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="i8s-14-yJA" firstAttribute="centerX" secondItem="DpS-FN-ACk" secondAttribute="centerX" id="auP-Xy-O0U"/>
+                                    <constraint firstItem="i8s-14-yJA" firstAttribute="centerY" secondItem="DpS-FN-ACk" secondAttribute="centerY" id="hR7-FW-jba"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -198,24 +211,29 @@
                             <constraint firstItem="cUn-Yv-D61" firstAttribute="leading" secondItem="akG-ls-ZzE" secondAttribute="leadingMargin" constant="-8" id="26c-p9-i7M"/>
                             <constraint firstItem="cUn-Yv-D61" firstAttribute="top" secondItem="gnh-ri-bsd" secondAttribute="bottom" constant="8" id="6aY-oL-gg3"/>
                             <constraint firstItem="gnh-ri-bsd" firstAttribute="leading" secondItem="akG-ls-ZzE" secondAttribute="leading" constant="8" id="8iQ-yF-397"/>
+                            <constraint firstItem="DpS-FN-ACk" firstAttribute="top" secondItem="akG-ls-ZzE" secondAttribute="top" id="90m-hm-XfE"/>
                             <constraint firstItem="uB5-wf-whI" firstAttribute="leading" secondItem="akG-ls-ZzE" secondAttribute="leading" constant="8" id="EOb-0v-ZDb"/>
                             <constraint firstItem="gnh-ri-bsd" firstAttribute="top" secondItem="uB5-wf-whI" secondAttribute="bottom" constant="8" id="HqF-gv-vTp"/>
+                            <constraint firstItem="H9U-s0-hZr" firstAttribute="top" secondItem="DpS-FN-ACk" secondAttribute="bottom" id="MWX-oL-uhW"/>
+                            <constraint firstAttribute="trailing" secondItem="DpS-FN-ACk" secondAttribute="trailing" id="Mam-3y-649"/>
                             <constraint firstAttribute="trailing" secondItem="gnh-ri-bsd" secondAttribute="trailing" constant="8" id="OvC-YY-wCl"/>
                             <constraint firstAttribute="trailing" secondItem="pnT-pS-6iT" secondAttribute="trailing" constant="8" id="Z1c-zo-eea"/>
                             <constraint firstItem="pnT-pS-6iT" firstAttribute="top" secondItem="gnh-ri-bsd" secondAttribute="bottom" constant="8" id="mWc-cp-wZR"/>
                             <constraint firstItem="pnT-pS-6iT" firstAttribute="leading" secondItem="cUn-Yv-D61" secondAttribute="trailing" constant="8" id="sna-uF-QUk"/>
                             <constraint firstAttribute="trailing" secondItem="uB5-wf-whI" secondAttribute="trailing" constant="8" id="uYh-xb-rbl"/>
+                            <constraint firstItem="DpS-FN-ACk" firstAttribute="leading" secondItem="akG-ls-ZzE" secondAttribute="leading" id="uns-UW-XMX"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="explanation" destination="gnh-ri-bsd" id="Igb-OC-BXJ"/>
                         <outlet property="picture" destination="uB5-wf-whI" id="zEJ-Gq-ljt"/>
+                        <outlet property="spinner" destination="DpS-FN-ACk" id="osk-RQ-VWd"/>
                         <outlet property="taken" destination="pnT-pS-6iT" id="gK6-B8-VDj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aaD-Xc-hEX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3131.5" y="17.5"/>
+            <point key="canvasLocation" x="3130.4000000000001" y="16.641679160419791"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BxI-6F-uZx">

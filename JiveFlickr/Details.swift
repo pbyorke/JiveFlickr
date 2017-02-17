@@ -19,6 +19,7 @@ class Details: UIViewController {
     @IBOutlet weak var picture: UIImageView!
     @IBOutlet weak var explanation: UILabel!
     @IBOutlet weak var taken: UILabel!
+    @IBOutlet weak var spinner: UIView!
     
     var photo = Photo()
 
@@ -31,11 +32,13 @@ class Details: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        picture.image = photo.getImage()
-        explanation.text = photo.title
+        spinner.isHidden = false
         photo.getDetails() {
             DispatchQueue.main.async {
+                self.picture.image = self.photo.image
                 self.taken.text = self.photo.taken
+                self.explanation.text = self.photo.title
+                self.spinner.isHidden = true
             }
         }
     }

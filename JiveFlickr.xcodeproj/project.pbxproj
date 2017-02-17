@@ -49,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C10653E11E57694400C1A89F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C1622DEE1E55531800EF0454 /* PhotoCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		C1CE4B051E564D3C00DCB60A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -64,7 +72,6 @@
 			children = (
 				C1D745CB1E54CE6300433DED /* Main.storyboard */,
 				C1D745D01E54CE6300433DED /* LaunchScreen.storyboard */,
-				C1622DEE1E55531800EF0454 /* PhotoCell.swift */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -92,6 +99,7 @@
 				C1D745CE1E54CE6300433DED /* Assets.xcassets */,
 				C1D745D31E54CE6300433DED /* Info.plist */,
 				C1CE4B051E564D3C00DCB60A /* View Controllers */,
+				C10653E11E57694400C1A89F /* Cells */,
 				C1CE4B061E564E8A00DCB60A /* Storyboards */,
 				C1EFF2121E57468E007B1B9F /* Data */,
 				C1E1FB381E550E59000A4F7C /* Extensions.swift */,
