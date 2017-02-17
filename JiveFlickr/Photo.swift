@@ -21,24 +21,24 @@ class Photo {
     var server = ""
     var secret = ""
     var title = ""
+    var taken = ""
     var thumbnail: UIImage?
-    var image: String {return "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_b.jpg"}
+    
+    ////////////////////////////////////////////////////////
+    //                                                    //
+    // fetchThumbnail() - ask Server to fetch me an image //
+    //                                                    //
+    ////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////////////
-    //                                                                     //
-    // getThumbnail() - if no cache, get one. then return the cached image //
-    //                                                                     //
-    /////////////////////////////////////////////////////////////////////////
-
-    func getThumbnail() -> UIImage? {
+    func fetchThumbnail(done: @escaping()->Void) {
         if thumbnail == nil {
-            do {
-                let url = URL(string: "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_t.jpg")
-                let data = try Data(contentsOf: url!)
-                thumbnail = UIImage(data: data)
-            } catch {}
+            Server.sharedInstance.fetchData("https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_t.jpg") {
+                data in
+                self.thumbnail = UIImage(data: data!)
+                done()
+            }
         }
-        return thumbnail
+        done()
     }
     
     /////////////////////////////////////////////////
@@ -55,6 +55,26 @@ class Photo {
         } catch {}
         return nil
     }
+    
+    ///////////////////////////////////////////////////
+    //                                               //
+    // getDetails() - get extra details about myself //
+    //                                               //
+    ///////////////////////////////////////////////////
+
+    func getDetails(done: @escaping ()->Void) {
+        Server.sharedInstance.fetch("https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=b3380a67070b4cb848414a17c9b58433&photo_id=\(id)&secret=\(secret)&format=json&nojsoncallback=1") {
+            json in
+            if let photo = json["photo"] as? [String:Any] {
+                if let dates = photo["dates"] as? [String:Any] {
+                    if let taken = dates["taken"] as? String {
+                        self.taken = taken
+                        done()
+                    }
+                }
+            }
+        }
+    }
 
     ////////////////////////////////////////////////////
     //                                                //
@@ -69,7 +89,7 @@ class Photo {
         print("  server    \(server)")
         print("  secret    \(secret)")
         print("  title     \(title)")
-        print("  thumbnail \(thumbnail)")
-        print("  image     \(image)")
+        print("  taken     \(taken)")
     }
+    
 }

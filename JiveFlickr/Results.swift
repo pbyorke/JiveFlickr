@@ -75,9 +75,13 @@ class Results: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? PhotoCell
         let photo = photos[indexPath.row]
-        cell?.data.text = photo.title
-        cell?.photo.image = photo.getThumbnail()
-        cell?.sizeToFit()
+        photo.fetchThumbnail() {
+            DispatchQueue.main.async {
+                cell?.data.text = photo.title
+                cell?.photo.image = photo.thumbnail
+                cell?.sizeToFit()
+            }
+        }
         return cell!
     }
     
@@ -91,6 +95,12 @@ class Results: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return 66
     }
     
+    //////////////////////////////////////////////////
+    //                                              //
+    // didSelectRowAt() - the user clicked on a row //
+    //                                              //
+    //////////////////////////////////////////////////
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = storyboard?.instantiateViewController(withIdentifier: "DetailsScene") as? Details
         controller?.photo = photos[indexPath.row]

@@ -8,6 +8,12 @@
 
 import UIKit
 
+//////////////////////////////////
+//                              //
+// class PhotoCell - bound data //
+//                              //
+//////////////////////////////////
+
 class PhotoCell: UITableViewCell {
 
     @IBOutlet weak var photo: UIImageView!
