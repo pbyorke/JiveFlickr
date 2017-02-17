@@ -54,6 +54,24 @@ class Model {
         defaults.synchronize()
     }
     
+    ///////////////////////////////////////////////////////////////////////////////////
+    //                                                                               //
+    // parameterize() - split a space-separated string into a comma-separated string //
+    //                                                                               //
+    ///////////////////////////////////////////////////////////////////////////////////
+
+    private func parameterize(_ string: String) -> String {
+        var searchString = ""
+        let array = string.components(separatedBy: " ")
+        for word in array {
+            if !searchString.isEmpty {
+                searchString += ","
+            }
+            searchString += word
+        }
+        return searchString
+    }
+    
     ///////////////////////////////////////////////////////////////////
     //                                                               //
     // searchAll() - search for all the flickr entries for a keyword //
@@ -61,7 +79,7 @@ class Model {
     ///////////////////////////////////////////////////////////////////
 
     func searchAll(_ string: String, done: @escaping ([Photo])->Void) {
-        let urlString = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=b3380a67070b4cb848414a17c9b58433&tags=\(string)&per_page=100&format=json&nojsoncallback=1"
+        let urlString = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=b3380a67070b4cb848414a17c9b58433&tags=\(parameterize(string))&per_page=100&format=json&nojsoncallback=1"
         server.fetch(urlString) {
             data in
             var photoArray = [Photo]()
