@@ -16,8 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        _ = Model() // instantiate singleton
-        _ = Server() // instantiate singleton
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = UINavigationController(rootViewController: SearchNavigationHandler().viewController)
+        window?.makeKeyAndVisible()
+//        _ = Model() // instantiate singleton
+//        _ = Server() // instantiate singleton
         return true
     }
 
