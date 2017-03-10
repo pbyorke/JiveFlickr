@@ -11,5 +11,6 @@ import Foundation
 protocol SearchInteractorProtocol {
 
     func getSearches() -> [String]
+    func getPhotos(_ string: String, done: @escaping ([Photo])->Void)
 
 }

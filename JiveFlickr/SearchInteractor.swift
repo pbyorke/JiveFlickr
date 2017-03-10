@@ -8,7 +8,16 @@
 
 import Foundation
 
-class SearchInteractor {}
+class SearchInteractor {
+
+    var dataManager: DataManager!
+
+    init() {
+        print("SearchInteractor.init()")
+        self.dataManager = DataManager()
+    }
+
+}
 
 extension SearchInteractor: SearchInteractorProtocol {
 
@@ -16,4 +25,11 @@ extension SearchInteractor: SearchInteractorProtocol {
         return DataManager().getSearchesFromDefaults()
     }
 
+    func getPhotos(_ string: String, done: @escaping ([Photo])->Void) {
+        return dataManager.searchAll(string) {
+            photos in
+            done(photos)
+        }
+    }
+    
 }

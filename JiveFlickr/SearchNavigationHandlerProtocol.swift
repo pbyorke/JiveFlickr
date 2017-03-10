@@ -6,6 +6,10 @@
 //  Copyright © 2017 Storke Brothers LLC. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-protocol SearchNavigationHandlerProtocol {}
+protocol SearchNavigationHandlerProtocol {
+
+    func getResults(_ string: String, nav: UINavigationController)
+
+}

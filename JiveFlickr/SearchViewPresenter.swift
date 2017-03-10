@@ -8,19 +8,23 @@
 
 import UIKit
 
+// MARK: - SearchViewPresenter class
+
 class SearchViewPresenter: NSObject {
     
-    var searchViewController = SearchViewController()
+    lazy var controller: SearchViewController = SearchViewController()
+    var navigationHandler: SearchNavigationHandler!
     var searches = [String]()
     var filteredSearches = [String]()
 
     override init() {
         super.init()
-        searchViewController.presenter = self
+        print("SearchViewPresenter.init()")
+        controller.presenter = self
         searches = SearchInteractor().getSearches()
-        searchViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        searchViewController.tableView.delegate = self
-        searchViewController.tableView.dataSource = self
+        controller.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        controller.tableView.delegate = self
+        controller.tableView.dataSource = self
     }
 
 }
@@ -38,7 +42,7 @@ extension SearchViewPresenter {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = searchViewController.tableView.dequeueReusableCell(withIdentifier: "Cell") as UITableViewCell!
+        let cell = controller.tableView.dequeueReusableCell(withIdentifier: "Cell") as UITableViewCell!
         cell?.textLabel?.text = filteredSearches[indexPath.row]
         return cell!
     }
@@ -47,12 +51,12 @@ extension SearchViewPresenter {
         return filteredSearches.count
     }
     
-    internal func filterContentForSearchText(searchText: String, scope: String = "All") {
+    fileprivate func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredSearches = searches.filter {
             word in
             return word.lowercased().containsString(searchText.lowercased())
         }
-        searchViewController.tableView.reloadData()
+        controller.tableView.reloadData()
     }
     
 }
@@ -62,7 +66,7 @@ extension SearchViewPresenter {
 extension SearchViewPresenter {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchViewController.searchController.searchBar.text = filteredSearches[indexPath.row]
+        controller.searchController.searchBar.text = filteredSearches[indexPath.row]
     }
     
 }
@@ -86,9 +90,9 @@ extension SearchViewPresenter {
         let text = searchBar.text!
         searchBar.text = ""
         appendIfMissing(text)
-//        let controller = storyboard?.instantiateViewController(withIdentifier: "ResultsScene") as? Results
-//        controller?.search = text
-//        navigationController?.pushViewController(controller!, animated: true)
+        if let nav = controller.navigationController {
+            navigationHandler.getResults(text, nav: nav)
+        }
     }
     
     private func appendIfMissing(_ text: String) {

@@ -15,6 +15,7 @@ class SearchViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("SearchViewController.viewDidLoad()")
         title = "Flickr Search"
         prepareUI()
     }
