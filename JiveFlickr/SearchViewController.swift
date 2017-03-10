@@ -11,10 +11,24 @@ import UIKit
 class SearchViewController: UITableViewController {
     
     var presenter: SearchViewPresenter!
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Flickr Search"
+        prepareUI()
+    }
+    
+    // MARK: - Fill in the UI elements
+    
+    private func prepareUI() {
+        searchController.searchResultsUpdater = presenter
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = presenter
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+//        searches = Model.sharedInstance.getSearches()
+//        tableView.reloadData()
     }
 
 }

@@ -8,4 +8,4 @@
 
 import UIKit
 
-protocol SearchViewPresenterProtocol: class, UITableViewDataSource, UITableViewDelegate {}
+protocol SearchViewPresenterProtocol: class, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {}
