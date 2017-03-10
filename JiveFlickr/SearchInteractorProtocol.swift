@@ -8,4 +8,8 @@
 
 import Foundation
 
-protocol SearchInteractorProtocol {}
+protocol SearchInteractorProtocol {
+
+    func getSearches() -> [String]
+
+}

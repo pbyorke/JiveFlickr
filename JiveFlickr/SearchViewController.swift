@@ -9,8 +9,11 @@
 import UIKit
 
 class SearchViewController: UITableViewController {
-
+    
+    var presenter: SearchViewPresenter!
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         title = "Flickr Search"
     }
 

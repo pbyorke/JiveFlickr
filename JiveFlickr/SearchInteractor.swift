@@ -10,4 +10,10 @@ import Foundation
 
 class SearchInteractor {}
 
-extension SearchInteractor: SearchInteractorProtocol {}
+extension SearchInteractor: SearchInteractorProtocol {
+
+    func getSearches() -> [String] {
+        return DataManager().getSearchesFromDefaults()
+    }
+
+}

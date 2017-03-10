@@ -10,7 +10,7 @@ import Foundation
 
 class SearchNavigationHandler {
     
-    let viewController = SearchViewController()
+    let searchViewPresenter = SearchViewPresenter()
     
 }
 
