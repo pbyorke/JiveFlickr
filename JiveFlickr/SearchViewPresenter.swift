@@ -8,23 +8,52 @@
 
 import UIKit
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                      //
+// VIPER                                                                                                //
+//                                                                                                      //
+// The Presenter does all the heavy lifting for the ViewController, making the ViewController pretty    //
+// dumb. This heavy lifting includes being a Delegate when needed. The Presenter obtains information    //
+// from fields in the ViewController as needed, as well as sending information back to it. The          //
+// Presenter has access to both the BusinessService and the NavigationHandler so that it can instigate  //
+// transfers to other screens and send needed data with it                                              //
+//                                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // MARK: - SearchViewPresenter class
 
 class SearchViewPresenter: NSObject {
     
-    lazy var controller: SearchViewController = SearchViewController()
-    var navigationHandler: SearchNavigationHandler!
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                  //
+    // VIPER                                                                                            //
+    //                                                                                                  //
+    // We are passed a reference to the Singleton BusinessService and the Singleton NavigationHandler   //
+    // and will keep them around for future use. We can also create a SearchViewController because      //
+    // we have a 1:1 relationship with it                                                               //
+    //                                                                                                  //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    var businessService: BusinessService!
+    var navigationHandler: NavigationHandler!
+    var viewController: SearchViewController!
+    
     var searches = [String]()
     var filteredSearches = [String]()
 
-    override init() {
+    required init(businessService: BusinessService, navigationHandler: NavigationHandler) {
         super.init()
-        print("SearchViewPresenter.init()")
-        controller.presenter = self
-        searches = SearchInteractor().getSearches()
-        controller.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        controller.tableView.delegate = self
-        controller.tableView.dataSource = self
+        
+        self.businessService = businessService
+        self.navigationHandler = navigationHandler
+        
+        viewController = SearchViewController()
+        viewController.presenter = self
+        viewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        viewController.tableView.delegate = self
+        viewController.tableView.dataSource = self
+        
+        searches = businessService.getSearchesFromDefaults()
     }
 
 }
@@ -42,7 +71,7 @@ extension SearchViewPresenter {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = controller.tableView.dequeueReusableCell(withIdentifier: "Cell") as UITableViewCell!
+        let cell = viewController.tableView.dequeueReusableCell(withIdentifier: "Cell") as UITableViewCell!
         cell?.textLabel?.text = filteredSearches[indexPath.row]
         return cell!
     }
@@ -56,7 +85,7 @@ extension SearchViewPresenter {
             word in
             return word.lowercased().containsString(searchText.lowercased())
         }
-        controller.tableView.reloadData()
+        viewController.tableView.reloadData()
     }
     
 }
@@ -66,7 +95,7 @@ extension SearchViewPresenter {
 extension SearchViewPresenter {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        controller.searchController.searchBar.text = filteredSearches[indexPath.row]
+        viewController.searchController.searchBar.text = filteredSearches[indexPath.row]
     }
     
 }
@@ -90,8 +119,12 @@ extension SearchViewPresenter {
         let text = searchBar.text!
         searchBar.text = ""
         appendIfMissing(text)
-        if let nav = controller.navigationController {
-            navigationHandler.getResults(text, nav: nav)
+        
+        businessService.searchAll(text) {
+            photos in
+            if let nav = self.viewController.navigationController {
+                self.navigationHandler.makeAndShowResultsViewPresenter(nav: nav, title: text, photos: photos)
+            }
         }
     }
     

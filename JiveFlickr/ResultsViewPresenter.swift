@@ -12,19 +12,18 @@ import UIKit
 
 class ResultsViewPresenter: NSObject {
     
-    lazy var controller: ResultsViewController = ResultsViewController()
-    var navigationHandler: SearchNavigationHandler!
+    var businessService: BusinessService!
+    var navigationHandler: NavigationHandler!
+    var viewController: ResultsViewController!
     var search = ""
     var photos: [Photo]!
     
-    override init() {
+    init(businessService: BusinessService, navigationHandler: NavigationHandler) {
         super.init()
-        print("ResultsViewPresenter.init()")
-        controller.presenter = self
-        controller.title = search
-//        controller.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-//        controller.tableView.delegate = self
-//        controller.tableView.dataSource = self
+        self.businessService = businessService
+        self.navigationHandler = navigationHandler
+        viewController = ResultsViewController()
+        viewController.presenter = self
     }
     
 }

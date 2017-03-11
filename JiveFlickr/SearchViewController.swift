@@ -8,14 +8,23 @@
 
 import UIKit
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                      //
+// VIPER                                                                                                //
+//                                                                                                      //
+// The only thing we will ever need to talk to is our Presenter. Our Presenter, when it creates us,     //
+// passes us a reference to itself, which we keep for future use                                        //
+//                                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 class SearchViewController: UITableViewController {
     
     var presenter: SearchViewPresenter!
+    
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("SearchViewController.viewDidLoad()")
         title = "Flickr Search"
         prepareUI()
     }

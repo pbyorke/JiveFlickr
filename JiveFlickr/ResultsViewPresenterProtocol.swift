@@ -10,7 +10,6 @@ import UIKit
 
 protocol ResultsViewPresenterProtocol: class, UITableViewDataSource, UITableViewDelegate {
 
-    var search: String { get set }
-    var photos: [Photo] { get set }
-    
+    init(businessService: BusinessService, navigationHandler: NavigationHandler)
+
 }

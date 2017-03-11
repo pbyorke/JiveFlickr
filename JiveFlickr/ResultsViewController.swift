@@ -15,8 +15,6 @@ class ResultsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ResultsViewController.viewDidLoad()")
-//        title = "Flickr Search"
         prepareUI()
     }
     
