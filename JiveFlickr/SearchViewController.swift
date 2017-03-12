@@ -17,11 +17,29 @@ import UIKit
 //                                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class SearchViewController: UITableViewController {
+class SearchViewController: UIViewController {
     
     var presenter: SearchViewPresenter!
     
     let searchController = UISearchController(searchResultsController: nil)
+    let table: UITableView = {
+        let widget = UITableView()
+        widget.translatesAutoresizingMaskIntoConstraints = false
+        return widget
+    }()
+    let spinner: UIView = {
+        let widget = UIView()
+        widget.translatesAutoresizingMaskIntoConstraints = false
+        widget.backgroundColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 0.5)
+        widget.isHidden = true
+        return widget
+    }()
+    private let activity: UIActivityIndicatorView = {
+        let widget = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        widget.translatesAutoresizingMaskIntoConstraints = false
+        widget.startAnimating()
+        return widget
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +50,29 @@ class SearchViewController: UITableViewController {
     // MARK: - Fill in the UI elements
     
     private func prepareUI() {
+        view.backgroundColor = .white
+        
         searchController.searchResultsUpdater = presenter
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = presenter
         definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
-//        searches = Model.sharedInstance.getSearches()
-//        tableView.reloadData()
+        
+        view.addSubview(table)
+        table.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        table.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        table.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        table.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        table.tableHeaderView = searchController.searchBar
+        
+        view.addSubview(spinner)
+        spinner.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        spinner.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        spinner.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        spinner.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        
+        spinner.addSubview(activity)
+        activity.centerXAnchor.constraint(equalTo: spinner.centerXAnchor).isActive = true
+        activity.centerYAnchor.constraint(equalTo: spinner.centerYAnchor).isActive = true
     }
 
 }

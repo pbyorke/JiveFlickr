@@ -49,9 +49,9 @@ class SearchViewPresenter: NSObject {
         
         viewController = SearchViewController()
         viewController.presenter = self
-        viewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        viewController.tableView.delegate = self
-        viewController.tableView.dataSource = self
+        viewController.table.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        viewController.table.delegate = self
+        viewController.table.dataSource = self
         
         searches = businessService.getSearchesFromDefaults()
     }
@@ -71,7 +71,7 @@ extension SearchViewPresenter {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = viewController.tableView.dequeueReusableCell(withIdentifier: "Cell") as UITableViewCell!
+        let cell = viewController.table.dequeueReusableCell(withIdentifier: "Cell") as UITableViewCell!
         cell?.textLabel?.text = filteredSearches[indexPath.row]
         return cell!
     }
@@ -85,7 +85,7 @@ extension SearchViewPresenter {
             word in
             return word.lowercased().containsString(searchText.lowercased())
         }
-        viewController.tableView.reloadData()
+        viewController.table.reloadData()
     }
     
 }
@@ -119,10 +119,11 @@ extension SearchViewPresenter {
         let text = searchBar.text!
         searchBar.text = ""
         appendIfMissing(text)
-        
+        self.viewController.spinner.isHidden = false
         businessService.searchAll(text) {
             photos in
             if let nav = self.viewController.navigationController {
+                self.viewController.spinner.isHidden = true
                 self.navigationHandler.makeAndShowResultsViewPresenter(nav: nav, title: text, photos: photos)
             }
         }
