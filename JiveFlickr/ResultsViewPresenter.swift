@@ -15,7 +15,6 @@ class ResultsViewPresenter: NSObject {
     var businessService: BusinessService!
     var navigationHandler: NavigationHandler!
     var viewController: ResultsViewController!
-//    var search = ""
     var photos: [Photo]!
     
     required init(businessService: BusinessService, navigationHandler: NavigationHandler) {
@@ -51,7 +50,6 @@ extension ResultsViewPresenter {
                 if let cell = cell {
                     cell.data.text = photo.title
                     cell.photo.image = photo.thumbnail
-                    cell.sizeToFit()
                 }
             }
         }
@@ -60,10 +58,6 @@ extension ResultsViewPresenter {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photos.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
     }
     
 }

@@ -16,12 +16,12 @@ class ResultsViewCell: UITableViewCell {
         widget.contentMode = .scaleAspectFit
         return widget
     }()
-    let data: UITextView = {
-        let widget = UITextView()
+    let data: UILabel = {
+        let widget = UILabel()
         widget.translatesAutoresizingMaskIntoConstraints = false
-        widget.isScrollEnabled = false
-        widget.isEditable = false
-//        widget.backgroundColor = .yellow
+        widget.numberOfLines = 3
+        widget.adjustsFontSizeToFitWidth = true
+        widget.minimumScaleFactor = 9 / widget.font.pointSize
         return widget
     }()
     
@@ -38,15 +38,15 @@ class ResultsViewCell: UITableViewCell {
         super.layoutSubviews()
 
         contentView.addSubview(photo)
-        photo.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        photo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
         photo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
         photo.heightAnchor.constraint(equalToConstant: 50).isActive = true
         photo.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
         contentView.addSubview(data)
         data.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-        data.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8).isActive = true
         data.leadingAnchor.constraint(equalTo: photo.trailingAnchor, constant: 8).isActive = true
         data.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8).isActive = true
+        data.heightAnchor.constraint(equalToConstant: 66).isActive = true
     }
 }

@@ -14,7 +14,7 @@ class ResultsViewController: UIViewController {
     let table: UITableView = {
         let widget = UITableView()
         widget.translatesAutoresizingMaskIntoConstraints = false
-        widget.estimatedRowHeight = 66
+        widget.rowHeight = 82
         return widget
     }()
     
