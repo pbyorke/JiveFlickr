@@ -45,7 +45,7 @@ extension ResultsViewPresenter {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = viewController.table.dequeueReusableCell(withIdentifier: "ResultsCell") as! ResultsViewCell!
         let photo = photos[indexPath.row]
-        photo.fetchThumbnail() {
+        businessService.fetchThumbnail(photo: photo) {
             DispatchQueue.main.async {
                 if let cell = cell {
                     cell.data.text = photo.title

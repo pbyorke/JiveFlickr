@@ -31,17 +31,17 @@ class Photo {
     //                                                    //
     ////////////////////////////////////////////////////////
 
-    func fetchThumbnail(done: @escaping()->Void) {
-        if thumbnail == nil {
-            Server.sharedInstance.fetchData("https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_t.jpg") {
-                data in
-                self.thumbnail = UIImage(data: data!)
-                done()
-            }
-        }
-        done()
-    }
-    
+//    func fetchThumbnail(done: @escaping()->Void) {
+//        if thumbnail == nil {
+//            Server.sharedInstance.fetchData("https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_t.jpg") {
+//                data in
+//                self.thumbnail = UIImage(data: data!)
+//                done()
+//            }
+//        }
+//        done()
+//    }
+//    
     ///////////////////////////////////////////////////
     //                                               //
     // getDetails() - get extra details about myself //

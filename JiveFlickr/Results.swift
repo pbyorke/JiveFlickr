@@ -74,14 +74,14 @@ class Results: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? PhotoCell
-        let photo = photos[indexPath.row]
-        photo.fetchThumbnail() {
-            DispatchQueue.main.async {
-                cell?.data.text = photo.title
-                cell?.photo.image = photo.thumbnail
-                cell?.sizeToFit()
-            }
-        }
+//        let photo = photos[indexPath.row]
+//        photo.fetchThumbnail() {
+//            DispatchQueue.main.async {
+//                cell?.data.text = photo.title
+//                cell?.photo.image = photo.thumbnail
+//                cell?.sizeToFit()
+//            }
+//        }
         return cell!
     }
     

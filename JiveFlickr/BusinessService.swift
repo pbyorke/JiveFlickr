@@ -6,7 +6,7 @@
 //  Copyright © 2017 Storke Brothers LLC. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                      //
@@ -90,6 +90,17 @@ extension BusinessService: BusinessServiceProtocol {
                 }
             }
         }
+    }
+    
+    func fetchThumbnail(photo: Photo, done: @escaping()->Void) {
+        if photo.thumbnail == nil {
+            fetchData("https://farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret)_t.jpg") {
+                data in
+                photo.thumbnail = UIImage(data: data!)
+                done()
+            }
+        }
+        done()
     }
     
 }
