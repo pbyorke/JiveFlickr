@@ -122,9 +122,11 @@ extension SearchViewPresenter {
         self.viewController.spinner.isHidden = false
         businessService.searchAll(text) {
             photos in
-            if let nav = self.viewController.navigationController {
-                self.viewController.spinner.isHidden = true
-                self.navigationHandler.makeAndShowResultsViewPresenter(nav: nav, title: text, photos: photos)
+            DispatchQueue.main.async {
+                if let nav = self.viewController.navigationController {
+                    self.viewController.spinner.isHidden = true
+                    self.navigationHandler.makeAndShowResultsViewPresenter(nav: nav, title: text, photos: photos)
+                }
             }
         }
     }

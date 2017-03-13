@@ -15,22 +15,58 @@ class ResultsViewPresenter: NSObject {
     var businessService: BusinessService!
     var navigationHandler: NavigationHandler!
     var viewController: ResultsViewController!
-    var search = ""
+//    var search = ""
     var photos: [Photo]!
     
-    init(businessService: BusinessService, navigationHandler: NavigationHandler) {
+    required init(businessService: BusinessService, navigationHandler: NavigationHandler) {
         super.init()
         self.businessService = businessService
         self.navigationHandler = navigationHandler
         viewController = ResultsViewController()
         viewController.presenter = self
+        viewController.table.register(ResultsViewCell.self, forCellReuseIdentifier: "ResultsCell")
+        viewController.table.delegate = self
+        viewController.table.dataSource = self
     }
     
 }
 
+// MARK: - SearchViewPresenterProtocol extension
+
+extension ResultsViewPresenter: ResultsViewPresenterProtocol {}
+
 // MARK: UITableViewDataSource extension
 
-extension ResultsViewPresenter {}
+extension ResultsViewPresenter {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = viewController.table.dequeueReusableCell(withIdentifier: "ResultsCell") as! ResultsViewCell!
+        let photo = photos[indexPath.row]
+        photo.fetchThumbnail() {
+            DispatchQueue.main.async {
+                if let cell = cell {
+                    cell.data.text = photo.title
+                    cell.photo.image = photo.thumbnail
+                    cell.sizeToFit()
+                }
+            }
+        }
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return photos.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+}
 
 // MARK: - UITableViewDelegate extension
 

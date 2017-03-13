@@ -11,7 +11,12 @@ import UIKit
 class ResultsViewController: UIViewController {
     
     var presenter: ResultsViewPresenter!
-    let searchController = UISearchController(searchResultsController: nil)
+    let table: UITableView = {
+        let widget = UITableView()
+        widget.translatesAutoresizingMaskIntoConstraints = false
+        widget.estimatedRowHeight = 66
+        return widget
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +26,14 @@ class ResultsViewController: UIViewController {
     // MARK: - Fill in the UI elements
     
     private func prepareUI() {
+        view.backgroundColor = .white
+        
+        view.addSubview(table)
+        table.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        table.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        table.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        table.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        
     }
     
 }
