@@ -12,5 +12,6 @@ protocol NavigationHandlerProtocol {
 
     func giveMeANewSearchViewPresenter() -> SearchViewPresenter
     func makeAndShowResultsViewPresenter(nav: UINavigationController, title: String, photos: [Photo])
+    func makeAndShowDetailsViewPresenter(nav: UINavigationController, title: String, photo: Photo)
     
 }

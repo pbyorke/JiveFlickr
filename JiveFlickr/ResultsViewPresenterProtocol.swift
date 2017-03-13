@@ -10,6 +10,6 @@ import UIKit
 
 protocol ResultsViewPresenterProtocol: class, UITableViewDataSource, UITableViewDelegate {
 
-    init(businessService: BusinessService, navigationHandler: NavigationHandler)
+    init(photos: [Photo], businessService: BusinessService, navigationHandler: NavigationHandler)
 
 }

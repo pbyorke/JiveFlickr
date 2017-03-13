@@ -19,7 +19,7 @@ class ResultsViewCell: UITableViewCell {
     let data: UILabel = {
         let widget = UILabel()
         widget.translatesAutoresizingMaskIntoConstraints = false
-        widget.numberOfLines = 3
+        widget.numberOfLines = 0
         widget.adjustsFontSizeToFitWidth = true
         widget.minimumScaleFactor = 9 / widget.font.pointSize
         return widget

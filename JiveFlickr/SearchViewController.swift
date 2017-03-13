@@ -21,6 +21,8 @@ class SearchViewController: UIViewController {
     
     var presenter: SearchViewPresenter!
     
+    // MARK: - Widgets
+    
     let searchController = UISearchController(searchResultsController: nil)
     let table: UITableView = {
         let widget = UITableView()
@@ -41,6 +43,7 @@ class SearchViewController: UIViewController {
         return widget
     }()
     
+    // MARK: - UIViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Flickr Search"

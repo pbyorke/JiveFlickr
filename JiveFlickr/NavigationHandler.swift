@@ -44,13 +44,18 @@ extension NavigationHandler: NavigationHandlerProtocol {
     }
 
     func makeAndShowResultsViewPresenter(nav: UINavigationController, title: String, photos: [Photo]) {
-        let resultsViewPresenter = ResultsViewPresenter(businessService: businessService, navigationHandler: self)
-        resultsViewPresenter.photos = photos
-        if let viewController = resultsViewPresenter.viewController {
+        let viewPresenter = ResultsViewPresenter(photos: photos, businessService: businessService, navigationHandler: self)
+        if let viewController = viewPresenter.viewController {
             viewController.title = title
             nav.pushViewController(viewController, animated: true)
         }
     }
 
+    func makeAndShowDetailsViewPresenter(nav: UINavigationController, title: String, photo: Photo) {
+        let viewPresenter = DetailsViewPresenter(businessService: self.businessService, navigationHandler: self, photo: photo)
+        if let viewController = viewPresenter.viewController {
+            nav.pushViewController(viewController, animated: true)
+        }
+    }
     
 }

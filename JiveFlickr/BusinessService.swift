@@ -103,4 +103,26 @@ extension BusinessService: BusinessServiceProtocol {
         done()
     }
     
+    func getDetails(photo: Photo, done: @escaping (Photo)->Void) {
+        fetch("https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=b3380a67070b4cb848414a17c9b58433&photo_id=\(photo.id)&secret=\(photo.secret)&format=json&nojsoncallback=1") {
+            json in
+            if let picture = json["photo"] as? [String:Any] {
+                if let dates = picture["dates"] as? [String:Any] {
+                    if let taken = dates["taken"] as? String {
+                        photo.taken = taken
+                        if photo.image == nil {
+                            self.fetchData("https://farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret)_b.jpg") {
+                                data in
+                                photo.image = UIImage(data: data!)
+                                done(photo)
+                            }
+                        } else {
+                            done(photo)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 }

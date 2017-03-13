@@ -33,14 +33,14 @@ class Details: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         spinner.isHidden = false
-        photo.getDetails() {
-            DispatchQueue.main.async {
-                self.picture.image = self.photo.image
-                self.taken.text = self.photo.taken
-                self.explanation.text = self.photo.title
-                self.spinner.isHidden = true
-            }
-        }
+//        photo.getDetails() {
+//            DispatchQueue.main.async {
+//                self.picture.image = self.photo.image
+//                self.taken.text = self.photo.taken
+//                self.explanation.text = self.photo.title
+//                self.spinner.isHidden = true
+//            }
+//        }
     }
 
 }

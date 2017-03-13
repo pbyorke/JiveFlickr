@@ -17,7 +17,7 @@ class ResultsViewPresenter: NSObject {
     var viewController: ResultsViewController!
     var photos: [Photo]!
     
-    required init(businessService: BusinessService, navigationHandler: NavigationHandler) {
+    required init(photos: [Photo], businessService: BusinessService, navigationHandler: NavigationHandler) {
         super.init()
         self.businessService = businessService
         self.navigationHandler = navigationHandler
@@ -26,6 +26,7 @@ class ResultsViewPresenter: NSObject {
         viewController.table.register(ResultsViewCell.self, forCellReuseIdentifier: "ResultsCell")
         viewController.table.delegate = self
         viewController.table.dataSource = self
+        self.photos = photos
     }
     
 }
@@ -64,4 +65,19 @@ extension ResultsViewPresenter {
 
 // MARK: - UITableViewDelegate extension
 
-extension ResultsViewPresenter {}
+extension ResultsViewPresenter {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewController.spinner.isHidden = false
+        businessService.getDetails(photo: photos[indexPath.row]) {
+            photo in
+            DispatchQueue.main.async {
+                if let nav = self.viewController.navigationController {
+                    self.viewController.spinner.isHidden = true
+                    self.navigationHandler.makeAndShowDetailsViewPresenter(nav: nav, title: self.viewController.title!, photo: photo)
+                }
+            }
+        }
+    }
+
+}
