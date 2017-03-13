@@ -42,6 +42,10 @@ class SearchViewController: UIViewController {
         widget.startAnimating()
         return widget
     }()
+    let clearButton: UIBarButtonItem = {
+        let widget = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearSearches))
+        return widget
+    }()
     
     // MARK: - UIViewController lifecycle
     override func viewDidLoad() {
@@ -50,10 +54,18 @@ class SearchViewController: UIViewController {
         prepareUI()
     }
     
+    // MARK: - Targets
+    
+    func clearSearches() {
+        presenter.clear()
+    }
+    
     // MARK: - Fill in the UI elements
     
     private func prepareUI() {
         view.backgroundColor = .white
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearSearches))
         
         searchController.searchResultsUpdater = presenter
         searchController.dimsBackgroundDuringPresentation = false
@@ -77,7 +89,7 @@ class SearchViewController: UIViewController {
         activity.centerXAnchor.constraint(equalTo: spinner.centerXAnchor).isActive = true
         activity.centerYAnchor.constraint(equalTo: spinner.centerYAnchor).isActive = true
     }
-
+    
 }
 
 extension SearchViewController: SearchViewControllerProtocol {}

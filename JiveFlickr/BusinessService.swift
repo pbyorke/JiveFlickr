@@ -59,15 +59,19 @@ extension BusinessService: BusinessServiceProtocol {
     
     func getSearchesFromDefaults() -> [String] {
         let defaults = UserDefaults.standard
-        
-        
-        
-//        return defaults.stringArray(forKey: "searches") ?? [String]()
-        return ["bridge","dog"]
-        
-        
-        
-        
+        return defaults.stringArray(forKey: "searches") ?? [String]()
+    }
+    
+    func putSearchesToDefaults(_ seaches: [String]) {
+        let defaults = UserDefaults.standard
+        defaults.set(seaches, forKey: "searches")
+        defaults.synchronize()
+    }
+    
+    func clearSearchesFromDefaults() {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "searches")
+        defaults.synchronize()
     }
     
     func searchAll(_ string: String, done: @escaping ([Photo])->Void) {

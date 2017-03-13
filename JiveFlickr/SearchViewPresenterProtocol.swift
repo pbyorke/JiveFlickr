@@ -11,5 +11,6 @@ import UIKit
 protocol SearchViewPresenterProtocol: class, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
 
     init(businessService: BusinessService, navigationHandler: NavigationHandler)
+    func clear()
 
 }

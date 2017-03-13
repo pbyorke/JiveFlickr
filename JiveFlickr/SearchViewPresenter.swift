@@ -60,7 +60,15 @@ class SearchViewPresenter: NSObject {
 
 // MARK: - SearchViewPresenterProtocol extension
 
-extension SearchViewPresenter: SearchViewPresenterProtocol {}
+extension SearchViewPresenter: SearchViewPresenterProtocol {
+
+    func clear() {
+        businessService.clearSearchesFromDefaults()
+        searches = [String]()
+        filteredSearches = [String]()
+    }
+
+}
 
 // MARK: - UITableViewDataSource extension
 
@@ -139,7 +147,7 @@ extension SearchViewPresenter {
         }
         searches.append(text.lowercased())
         searches.sort()
-        Model.sharedInstance.putSearches(searches)
+        businessService.putSearchesToDefaults(searches)
     }
     
 }
