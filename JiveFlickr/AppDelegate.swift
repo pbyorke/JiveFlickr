@@ -6,6 +6,7 @@
 //  Copyright © 2017 Storke Brothers LLC. All rights reserved.
 //
 // https://code.tutsplus.com/tutorials/the-ultimate-guide-to-decoding-the-flickr-api--net-5981
+// https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/ProgrammaticallyCreatingConstraints.html
 //
 
 import UIKit
