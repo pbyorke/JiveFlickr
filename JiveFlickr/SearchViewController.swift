@@ -42,7 +42,7 @@ class SearchViewController: UIViewController {
         widget.startAnimating()
         return widget
     }()
-    let clearButton: UIBarButtonItem = {
+    private let clearButton: UIBarButtonItem = {
         let widget = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearSearches))
         return widget
     }()

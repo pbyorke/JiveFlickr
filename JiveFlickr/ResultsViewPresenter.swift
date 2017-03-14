@@ -12,12 +12,12 @@ import UIKit
 
 class ResultsViewPresenter: NSObject {
     
-    var businessService: BusinessService!
-    var navigationHandler: NavigationHandler!
+    fileprivate var businessService: BusinessService!
+    fileprivate var navigationHandler: NavigationHandler!
     var viewController: ResultsViewController!
-    var photos: [Photo]!
+    fileprivate var photos: [Photo]!
     
-    required init(photos: [Photo], businessService: BusinessService, navigationHandler: NavigationHandler) {
+    required init(businessService: BusinessService, navigationHandler: NavigationHandler, photos: [Photo]) {
         super.init()
         self.businessService = businessService
         self.navigationHandler = navigationHandler
@@ -43,10 +43,14 @@ extension ResultsViewPresenter {
         return 1
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return photos.count
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = viewController.table.dequeueReusableCell(withIdentifier: "ResultsCell") as! ResultsViewCell!
         let photo = photos[indexPath.row]
-        businessService.fetchThumbnail(photo: photo) {
+        businessService.fetchThumbnailFor(photo: photo) {
             DispatchQueue.main.async {
                 if let cell = cell {
                     cell.data.text = photo.title
@@ -55,10 +59,6 @@ extension ResultsViewPresenter {
             }
         }
         return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photos.count
     }
     
 }

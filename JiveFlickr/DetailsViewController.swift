@@ -28,7 +28,7 @@ class DetailsViewController: UIViewController {
         widget.minimumScaleFactor = 9 / widget.font.pointSize
         return widget
     }()
-    let takenLabel: UILabel = {
+    fileprivate let takenLabel: UILabel = {
         let widget = UILabel()
         widget.translatesAutoresizingMaskIntoConstraints = false
         widget.text = "Taken:"
@@ -39,7 +39,6 @@ class DetailsViewController: UIViewController {
         widget.translatesAutoresizingMaskIntoConstraints = false
         return widget
     }()
-    @IBOutlet weak var spinner: UIView!
     
     // MARK: - UIViewController lifecycle
     
@@ -50,7 +49,7 @@ class DetailsViewController: UIViewController {
     
     // MARK: - Fill in the UI elements
     
-    private func prepareUI() {
+    fileprivate func prepareUI() {
         view.backgroundColor = .white
         
         view.addSubview(picture)

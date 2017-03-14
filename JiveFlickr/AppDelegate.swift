@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //                                                                                                      //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         
-        let searchViewPresenter = navigationHandler.giveMeANewSearchViewPresenter()
+        let searchViewPresenter = navigationHandler.giveMeARootViewPresenter()
         let viewController = searchViewPresenter.viewController
         
         window = UIWindow(frame: UIScreen.main.bounds)

@@ -18,9 +18,16 @@ import UIKit
 //                                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-import Foundation
+//import Foundation
+
+// MARK: - BusinessService class
 
 class BusinessService {
+    
+    fileprivate let searchURL = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=b3380a67070b4cb848414a17c9b58433&tags=%@&per_page=100&format=json&nojsoncallback=1"
+    fileprivate let thumbnailURL = "https://farm%d.staticflickr.com/%@/%@_%@_t.jpg"
+    fileprivate let detailsURL = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=b3380a67070b4cb848414a17c9b58433&photo_id=%@&secret=%@&format=json&nojsoncallback=1"
+    fileprivate let detailsPhotoURL = "https://farm%d.staticflickr.com/%@/%@_%@_b.jpg"
     
     fileprivate func parameterize(_ string: String) -> String {
         var searchString = ""
@@ -55,6 +62,8 @@ class BusinessService {
     
 }
 
+// MARK: - BusinessServiceProtocol extension
+
 extension BusinessService: BusinessServiceProtocol {
     
     func getSearchesFromDefaults() -> [String] {
@@ -74,8 +83,8 @@ extension BusinessService: BusinessServiceProtocol {
         defaults.synchronize()
     }
     
-    func searchAll(_ string: String, done: @escaping ([Photo])->Void) {
-        let urlString = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=b3380a67070b4cb848414a17c9b58433&tags=\(parameterize(string))&per_page=100&format=json&nojsoncallback=1"
+    func searchAllPhotosFor(string: String, done: @escaping ([Photo])->Void) {
+        let urlString = String(format: searchURL, parameterize(string))
         fetch(urlString) {
             data in
             var photoArray = [Photo]()
@@ -96,9 +105,10 @@ extension BusinessService: BusinessServiceProtocol {
         }
     }
     
-    func fetchThumbnail(photo: Photo, done: @escaping()->Void) {
+    func fetchThumbnailFor(photo: Photo, done: @escaping()->Void) {
         if photo.thumbnail == nil {
-            fetchData("https://farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret)_t.jpg") {
+            let urlString = String(format: thumbnailURL, photo.farm, photo.server, photo.id, photo.secret)
+            fetchData(urlString) {
                 data in
                 photo.thumbnail = UIImage(data: data!)
                 done()
@@ -108,14 +118,16 @@ extension BusinessService: BusinessServiceProtocol {
     }
     
     func getDetails(photo: Photo, done: @escaping (Photo)->Void) {
-        fetch("https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=b3380a67070b4cb848414a17c9b58433&photo_id=\(photo.id)&secret=\(photo.secret)&format=json&nojsoncallback=1") {
+        let urlString = String(format: detailsURL, photo.id, photo.secret)
+        fetch(urlString) {
             json in
             if let picture = json["photo"] as? [String:Any] {
                 if let dates = picture["dates"] as? [String:Any] {
                     if let taken = dates["taken"] as? String {
                         photo.taken = taken
                         if photo.image == nil {
-                            self.fetchData("https://farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret)_b.jpg") {
+                            let urlString = String(format: self.detailsPhotoURL, photo.farm, photo.server, photo.id, photo.secret)
+                            self.fetchData(urlString) {
                                 data in
                                 photo.image = UIImage(data: data!)
                                 done(photo)

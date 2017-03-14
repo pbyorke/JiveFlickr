@@ -10,8 +10,8 @@ import UIKit
 
 class DetailsViewPresenter: NSObject {
     
-    var businessService: BusinessService!
-    var navigationHandler: NavigationHandler!
+    fileprivate var businessService: BusinessService!
+    fileprivate var navigationHandler: NavigationHandler!
     var viewController: DetailsViewController!
     
     required init(businessService: BusinessService, navigationHandler: NavigationHandler, photo: Photo) {

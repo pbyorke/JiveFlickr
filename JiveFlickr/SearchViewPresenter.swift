@@ -34,12 +34,12 @@ class SearchViewPresenter: NSObject {
     //                                                                                                  //
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    var businessService: BusinessService!
-    var navigationHandler: NavigationHandler!
+    fileprivate var businessService: BusinessService!
+    fileprivate var navigationHandler: NavigationHandler!
     var viewController: SearchViewController!
     
-    var searches = [String]()
-    var filteredSearches = [String]()
+    fileprivate var searches = [String]()
+    fileprivate var filteredSearches = [String]()
 
     required init(businessService: BusinessService, navigationHandler: NavigationHandler) {
         super.init()
@@ -128,7 +128,7 @@ extension SearchViewPresenter {
         searchBar.text = ""
         appendIfMissing(text)
         self.viewController.spinner.isHidden = false
-        businessService.searchAll(text) {
+        businessService.searchAllPhotosFor(string: text) {
             photos in
             DispatchQueue.main.async {
                 if let nav = self.viewController.navigationController {

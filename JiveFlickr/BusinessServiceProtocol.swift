@@ -13,8 +13,8 @@ protocol BusinessServiceProtocol {
     func getSearchesFromDefaults() -> [String]
     func putSearchesToDefaults(_ seaches: [String])
     func clearSearchesFromDefaults()
-    func searchAll(_ string: String, done: @escaping ([Photo])->Void)
-    func fetchThumbnail(photo: Photo, done: @escaping()->Void)
+    func searchAllPhotosFor(string: String, done: @escaping ([Photo])->Void)
+    func fetchThumbnailFor(photo: Photo, done: @escaping()->Void)
     func getDetails(photo: Photo, done: @escaping (Photo)->Void)
 
 }

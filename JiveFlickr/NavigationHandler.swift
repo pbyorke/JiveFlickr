@@ -18,6 +18,8 @@ import UIKit
 //                                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// MARK: - NavigationHandler class
+
 class NavigationHandler {
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +31,7 @@ class NavigationHandler {
     //                                                                                                  //
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    var businessService: BusinessService
+    fileprivate var businessService: BusinessService
     
     init(businessService: BusinessService) {
         self.businessService = businessService
@@ -37,14 +39,16 @@ class NavigationHandler {
     
 }
 
+// MARK: - NavigationHandlerProtocol extension
+
 extension NavigationHandler: NavigationHandlerProtocol {
 
-    func giveMeANewSearchViewPresenter() -> SearchViewPresenter {
+    func giveMeARootViewPresenter() -> SearchViewPresenter {
         return SearchViewPresenter(businessService: businessService, navigationHandler: self)
     }
 
     func makeAndShowResultsViewPresenter(nav: UINavigationController, title: String, photos: [Photo]) {
-        let viewPresenter = ResultsViewPresenter(photos: photos, businessService: businessService, navigationHandler: self)
+        let viewPresenter = ResultsViewPresenter(businessService: businessService, navigationHandler: self, photos: photos)
         if let viewController = viewPresenter.viewController {
             viewController.title = title
             nav.pushViewController(viewController, animated: true)
@@ -54,6 +58,7 @@ extension NavigationHandler: NavigationHandlerProtocol {
     func makeAndShowDetailsViewPresenter(nav: UINavigationController, title: String, photo: Photo) {
         let viewPresenter = DetailsViewPresenter(businessService: self.businessService, navigationHandler: self, photo: photo)
         if let viewController = viewPresenter.viewController {
+            viewController.title = title
             nav.pushViewController(viewController, animated: true)
         }
     }

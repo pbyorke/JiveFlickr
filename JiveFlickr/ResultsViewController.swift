@@ -27,7 +27,7 @@ class ResultsViewController: UIViewController {
         widget.isHidden = true
         return widget
     }()
-    private let activity: UIActivityIndicatorView = {
+    fileprivate let activity: UIActivityIndicatorView = {
         let widget = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         widget.translatesAutoresizingMaskIntoConstraints = false
         widget.startAnimating()
@@ -43,7 +43,7 @@ class ResultsViewController: UIViewController {
     
     // MARK: - Fill in the UI elements
     
-    private func prepareUI() {
+    fileprivate func prepareUI() {
         view.backgroundColor = .white
         
         view.addSubview(table)
