@@ -14,20 +14,23 @@ class ResultsViewController: UIViewController {
 
     // MARK: - Widgets
     
-    let table: UITableView = {
+    private lazy var table: UITableView = {
         let widget = UITableView()
         widget.translatesAutoresizingMaskIntoConstraints = false
+        widget.delegate = self.presenter
+        widget.dataSource = self.presenter
+        widget.register(ResultsViewCell.self, forCellReuseIdentifier: "ResultsCell")
         widget.rowHeight = 82
         return widget
     }()
-    let spinner: UIView = {
+    fileprivate lazy var spinner: UIView = {
         let widget = UIView()
         widget.translatesAutoresizingMaskIntoConstraints = false
         widget.backgroundColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 0.5)
         widget.isHidden = true
         return widget
     }()
-    fileprivate let activity: UIActivityIndicatorView = {
+    private lazy var activity: UIActivityIndicatorView = {
         let widget = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         widget.translatesAutoresizingMaskIntoConstraints = false
         widget.startAnimating()
@@ -43,7 +46,7 @@ class ResultsViewController: UIViewController {
     
     // MARK: - Fill in the UI elements
     
-    fileprivate func prepareUI() {
+    private func prepareUI() {
         view.backgroundColor = .white
         
         view.addSubview(table)
@@ -65,4 +68,10 @@ class ResultsViewController: UIViewController {
     
 }
 
-extension ResultsViewController: ResultsViewControllerProtocol {}
+extension ResultsViewController: ResultsViewControllerProtocol {
+    
+    func spin(_ on: Bool) {
+        spinner.isHidden = !on
+    }
+    
+}

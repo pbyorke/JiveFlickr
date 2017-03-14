@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol DetailsViewPresenterProtocol {
+protocol DetailsViewPresenterProtocol: class {
     
     init(businessService: BusinessService, navigationHandler: NavigationHandler, photo: Photo)
     

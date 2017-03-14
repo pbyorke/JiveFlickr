@@ -22,7 +22,7 @@ import UIKit
 
 // MARK: - SearchViewPresenter class
 
-class SearchViewPresenter: NSObject {
+class SearchViewPresenter: NSObject, SearchViewPresenterProtocol {
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                                  //
@@ -37,80 +37,67 @@ class SearchViewPresenter: NSObject {
     fileprivate var businessService: BusinessService!
     fileprivate var navigationHandler: NavigationHandler!
     var viewController: SearchViewController!
-    
     fileprivate var searches = [String]()
     fileprivate var filteredSearches = [String]()
 
     required init(businessService: BusinessService, navigationHandler: NavigationHandler) {
         super.init()
-        
         self.businessService = businessService
         self.navigationHandler = navigationHandler
-        
         viewController = SearchViewController()
         viewController.presenter = self
-        viewController.table.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        viewController.table.delegate = self
-        viewController.table.dataSource = self
-        
         searches = businessService.getSearchesFromDefaults()
     }
 
-}
-
-// MARK: - SearchViewPresenterProtocol extension
-
-extension SearchViewPresenter: SearchViewPresenterProtocol {
-
+    fileprivate func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredSearches = searches.filter {
+            word in
+            return word.lowercased().containsString(searchText.lowercased())
+        }
+        viewController.reloadData()
+    }
+    
     func clear() {
         businessService.clearSearchesFromDefaults()
         searches = [String]()
         filteredSearches = [String]()
     }
-
+    
 }
 
 // MARK: - UITableViewDataSource extension
 
-extension SearchViewPresenter {
+extension SearchViewPresenter: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = viewController.table.dequeueReusableCell(withIdentifier: "Cell") as UITableViewCell!
-        cell?.textLabel?.text = filteredSearches[indexPath.row]
-        return cell!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredSearches.count
     }
     
-    fileprivate func filterContentForSearchText(searchText: String, scope: String = "All") {
-        filteredSearches = searches.filter {
-            word in
-            return word.lowercased().containsString(searchText.lowercased())
-        }
-        viewController.table.reloadData()
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as UITableViewCell!
+        cell?.textLabel?.text = filteredSearches[indexPath.row]
+        return cell!
     }
     
 }
 
 // MARK: - UITableViewDelegate extension
 
-extension SearchViewPresenter {
+extension SearchViewPresenter: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewController.searchController.searchBar.text = filteredSearches[indexPath.row]
+        viewController.setSearchText(filteredSearches[indexPath.row])
     }
     
 }
 
 // MARK: - UISearchResultsUpdating extension
 
-extension SearchViewPresenter {
+extension SearchViewPresenter: UISearchResultsUpdating {
     
     @available(iOS 8.0, *)
     public func updateSearchResults(for searchController: UISearchController) {
@@ -121,18 +108,18 @@ extension SearchViewPresenter {
 
 // MARK: - UISearchBarDelegate extension
 
-extension SearchViewPresenter {
+extension SearchViewPresenter: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let text = searchBar.text!
         searchBar.text = ""
         appendIfMissing(text)
-        self.viewController.spinner.isHidden = false
+        viewController.spin(true)
         businessService.searchAllPhotosFor(string: text) {
             photos in
             DispatchQueue.main.async {
                 if let nav = self.viewController.navigationController {
-                    self.viewController.spinner.isHidden = true
+                    self.viewController.spin(false)
                     self.navigationHandler.makeAndShowResultsViewPresenter(nav: nav, title: text, photos: photos)
                 }
             }

@@ -6,9 +6,9 @@
 //  Copyright © 2017 Storke Brothers LLC. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-protocol SearchViewPresenterProtocol: class, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+protocol SearchViewPresenterProtocol: class {
 
     init(businessService: BusinessService, navigationHandler: NavigationHandler)
     func clear()

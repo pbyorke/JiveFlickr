@@ -28,13 +28,15 @@ class ResultsViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         accessoryType = .disclosureIndicator
+        prepareUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func layoutSubviews() {
+//    override func layoutSubviews() {
+    private func prepareUI() {
         super.layoutSubviews()
 
         contentView.addSubview(photo)
@@ -46,7 +48,7 @@ class ResultsViewCell: UITableViewCell {
         contentView.addSubview(data)
         data.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
         data.leadingAnchor.constraint(equalTo: photo.trailingAnchor, constant: 8).isActive = true
-        data.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8).isActive = true
+        data.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
         data.heightAnchor.constraint(equalToConstant: 66).isActive = true
     }
 }

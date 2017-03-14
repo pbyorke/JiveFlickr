@@ -2,10 +2,16 @@
 //  DetailsViewControllerProtocol.swift
 //  JiveFlickr
 //
-//  Created by Peter Yorke on 3/13/17.
+//  Created by Peter Yorke on 3/14/17.
 //  Copyright © 2017 Storke Brothers LLC. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-protocol DetailsViewControllerProtocol {}
+protocol DetailsViewControllerProtocol {
+    
+    func setPicture(_ image: UIImage)
+    func setExplanation(_ explanation: String)
+    func setTaken(_ taken: String)
+    
+}

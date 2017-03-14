@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - ResultsViewPresenter class
 
-class ResultsViewPresenter: NSObject {
+class ResultsViewPresenter: NSObject, ResultsViewPresenterProtocol {
     
     fileprivate var businessService: BusinessService!
     fileprivate var navigationHandler: NavigationHandler!
@@ -23,21 +23,14 @@ class ResultsViewPresenter: NSObject {
         self.navigationHandler = navigationHandler
         viewController = ResultsViewController()
         viewController.presenter = self
-        viewController.table.register(ResultsViewCell.self, forCellReuseIdentifier: "ResultsCell")
-        viewController.table.delegate = self
-        viewController.table.dataSource = self
         self.photos = photos
     }
     
 }
 
-// MARK: - SearchViewPresenterProtocol extension
-
-extension ResultsViewPresenter: ResultsViewPresenterProtocol {}
-
 // MARK: UITableViewDataSource extension
 
-extension ResultsViewPresenter {
+extension ResultsViewPresenter: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -48,7 +41,7 @@ extension ResultsViewPresenter {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = viewController.table.dequeueReusableCell(withIdentifier: "ResultsCell") as! ResultsViewCell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ResultsCell") as! ResultsViewCell!
         let photo = photos[indexPath.row]
         businessService.fetchThumbnailFor(photo: photo) {
             DispatchQueue.main.async {
@@ -65,15 +58,15 @@ extension ResultsViewPresenter {
 
 // MARK: - UITableViewDelegate extension
 
-extension ResultsViewPresenter {
+extension ResultsViewPresenter: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewController.spinner.isHidden = false
+        viewController.spin(true)
         businessService.getDetails(photo: photos[indexPath.row]) {
             photo in
             DispatchQueue.main.async {
                 if let nav = self.viewController.navigationController {
-                    self.viewController.spinner.isHidden = true
+                    self.viewController.spin(false)
                     self.navigationHandler.makeAndShowDetailsViewPresenter(nav: nav, title: self.viewController.title!, photo: photo)
                 }
             }

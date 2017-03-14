@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailsViewPresenter: NSObject {
+class DetailsViewPresenter: NSObject, DetailsViewPresenterProtocol {
     
     fileprivate var businessService: BusinessService!
     fileprivate var navigationHandler: NavigationHandler!
@@ -20,14 +20,10 @@ class DetailsViewPresenter: NSObject {
         self.navigationHandler = navigationHandler
         viewController = DetailsViewController()
         viewController.presenter = self
-        viewController.picture.image = photo.image
-        viewController.explanation.text = photo.title
-        viewController.taken.text = photo.taken
+        viewController.setPicture(photo.image!)
+        viewController.setExplanation(photo.title)
+        viewController.setTaken(photo.taken)
+        
     }
     
 }
-
-// MARK: - DetailsViewPresenterProtocol extension
-
-extension DetailsViewPresenter: DetailsViewPresenterProtocol {}
-

@@ -6,9 +6,9 @@
 //  Copyright © 2017 Storke Brothers LLC. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-protocol ResultsViewPresenterProtocol: class, UITableViewDataSource, UITableViewDelegate {
+protocol ResultsViewPresenterProtocol: class {
 
     init(businessService: BusinessService, navigationHandler: NavigationHandler, photos: [Photo])
 

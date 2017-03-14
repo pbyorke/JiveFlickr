@@ -23,26 +23,29 @@ class SearchViewController: UIViewController {
     
     // MARK: - Widgets
     
-    let searchController = UISearchController(searchResultsController: nil)
-    let table: UITableView = {
+    fileprivate let searchController = UISearchController(searchResultsController: nil)
+    fileprivate lazy var table: UITableView = {
         let widget = UITableView()
         widget.translatesAutoresizingMaskIntoConstraints = false
+        widget.delegate = self.presenter
+        widget.dataSource = self.presenter
+        widget.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         return widget
     }()
-    let spinner: UIView = {
+    fileprivate lazy var spinner: UIView = {
         let widget = UIView()
         widget.translatesAutoresizingMaskIntoConstraints = false
         widget.backgroundColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 0.5)
         widget.isHidden = true
         return widget
     }()
-    private let activity: UIActivityIndicatorView = {
+    private lazy var activity: UIActivityIndicatorView = {
         let widget = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         widget.translatesAutoresizingMaskIntoConstraints = false
         widget.startAnimating()
         return widget
     }()
-    private let clearButton: UIBarButtonItem = {
+    private lazy var clearButton: UIBarButtonItem = {
         let widget = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearSearches))
         return widget
     }()
@@ -66,7 +69,7 @@ class SearchViewController: UIViewController {
         view.backgroundColor = .white
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearSearches))
-        
+
         searchController.searchResultsUpdater = presenter
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = presenter
@@ -92,4 +95,18 @@ class SearchViewController: UIViewController {
     
 }
 
-extension SearchViewController: SearchViewControllerProtocol {}
+extension SearchViewController: SearchViewControllerProtocol {
+    
+    func reloadData() {
+        table.reloadData()
+    }
+    
+    func spin(_ on: Bool) {
+        spinner.isHidden = !on
+    }
+    
+    func setSearchText(_ text: String) {
+        searchController.searchBar.text = text
+    }
+    
+}

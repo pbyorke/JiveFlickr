@@ -14,13 +14,13 @@ class DetailsViewController: UIViewController {
     
     // MARK: - Widgets
     
-    let picture: UIImageView = {
+    fileprivate let picture: UIImageView = {
         let widget = UIImageView()
         widget.translatesAutoresizingMaskIntoConstraints = false
         widget.contentMode = .scaleAspectFit
         return widget
     }()
-    let explanation: UILabel = {
+    fileprivate let explanation: UILabel = {
         let widget = UILabel()
         widget.translatesAutoresizingMaskIntoConstraints = false
         widget.numberOfLines = 0
@@ -28,13 +28,13 @@ class DetailsViewController: UIViewController {
         widget.minimumScaleFactor = 9 / widget.font.pointSize
         return widget
     }()
-    fileprivate let takenLabel: UILabel = {
+    private let takenLabel: UILabel = {
         let widget = UILabel()
         widget.translatesAutoresizingMaskIntoConstraints = false
         widget.text = "Taken:"
         return widget
     }()
-    let taken: UILabel = {
+    fileprivate let taken: UILabel = {
         let widget = UILabel()
         widget.translatesAutoresizingMaskIntoConstraints = false
         return widget
@@ -79,4 +79,19 @@ class DetailsViewController: UIViewController {
     
 }
 
-extension DetailsViewController: DetailsViewControllerProtocol {}
+// MARK: - DetailsViewControllerProtocol extension
+
+extension DetailsViewController: DetailsViewControllerProtocol {
+    
+    func setPicture(_ image: UIImage) {
+        self.picture.image = image
+    }
+    
+    func setExplanation(_ explanation: String) {
+        self.explanation.text = explanation
+    }
+    
+    func setTaken(_ taken: String) {
+        self.taken.text = taken
+    }
+}
